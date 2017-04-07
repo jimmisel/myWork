@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #map {
+                height: 400px;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>Google Maps</h3>
+        <div id="map"></div>
+        {% if CHPObjectlist %}
+         <script type="text/javascript"> 
+            //This is used to pull the array from django and push it into the javascript
+            window.locations = {{CHPObjectlist| safe}};
+        </script>
+        {% endif %}
+
+        <script>
+            var locations;
+            var obj = JSON.parse(JSON.stringify(locations));
+          
+            var markers = [];
+            function initMap() {
+            var center = new google.maps.LatLng(51.396097, 10.130077);
+            var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 7,
+                    center: center,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+
+            });
+            var num_markers = locations.length;
+            for (var i = 0; i < num_markers; i++) {
+            markers[i] = new google.maps.Marker({
+                    position: {lat: parseFloat(obj[i].fields.CHPLatitude), lng: parseFloat(obj[i].fields.CHPLongitude)},
+                    map: map,
+                    html: obj[i].fields.CHPName,
+                    id: parseFloat(obj[i].fields.CHPInfo)
+            });
+            google.maps.event.addListener(markers[i], 'click', function () {
+            var infowindow = new google.maps.InfoWindow({
+                    id: this.id,
+                    content: this.html,
+                    position: this.getPosition()
+            });
+            google.maps.event.addListenerOnce(infowindow, 'closeclick', function () {
+            markers[this.id].setVisible(true);
+            });
+            
+            infowindow.open(map);
+            });
+            };
+            };
+        </script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=YoOUR_KEY_HERE&callback=initMap">
+        </script>
+    </body>
+</html>
+
