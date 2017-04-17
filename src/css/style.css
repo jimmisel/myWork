@@ -1,0 +1,28 @@
+ul {
+    list-style-type: none;
+}
+
+hr {
+    border-top: 1px solid #000000;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
+}
+
+#nav {
+    padding-top: 35px;
+}
+.vertLine{
+    border-right: 1px solid #000000;
+}
+
+#mapCon {
+    padding-top: 20px;
+}
+
+#staticSize {
+    height: 110px;
+    overflow: auto;
+}

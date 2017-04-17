@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Google Maps</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12" id="nav">
+                <!-- Nav bar and logo here-->
+                <div class="col-md-4">Logo here</div>
+                <div class="col-md-8">Menu here</div>
+                <hr />
+            </div>
+        </div>
+
+        <div class="row" id="mapCon">
+            <div class="col-md-9">
+                Google Map
+                <div id="map"></div>
+
+                {% if CHPObjectlist %}
+                <script type="text/javascript">
+                    window.points = {{CHPObjectlist| safe}};
+                    window.warn = {{CHPwarn| safe}};
+                    window.CHPError = {{CHPerror| safe}};
+                    window.timer = {{CHPtimer| safe}};
+                </script>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div id="name"><!--CHPName here--></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="timer"><!--CHPMaintenance_time1 here--></div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div id="nameWarning"><!--Name from the one marked with warning--></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="warning"><!-- just warning or warning and shutdown--></div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div id="malfunctionName"><!--Name from the one marked with warning--></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="malfunction"><!-- just warning or warning and shutdown--></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                Footer goes here
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE&callback=initMap">
+    </script>
+</body>
+</html>
